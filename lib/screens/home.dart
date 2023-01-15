@@ -1,9 +1,10 @@
+import 'dart:developer';
+
+import 'package:english_dictionary/services/http_service.dart';
 import 'package:english_dictionary/widgets/searchbar.dart';
 import 'package:english_dictionary/widgets/spacings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,18 +14,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController _searchbarController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Dictionary"),
-            addVerticalSpace(20),
-            SearchBar(),
-          ],
+    Size size = MediaQuery.of(context).size;
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.asset(
+                  'lib/assets/images/dictionary.jpg',
+                  height: size.height / 4,
+                ),
+                Text(
+                  "Dictionary",
+                  style: GoogleFonts.raleway(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                addVerticalSpace(20),
+                SearchBar(
+                  searchbarController: _searchbarController,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

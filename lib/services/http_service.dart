@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:http/http.dart';
 //  [
 //     {
 //       "word": "hello",
@@ -50,5 +54,21 @@
 //     }
 //   ]
 
-
 // https://api.dictionaryapi.dev/api/v2/entries/en/<word>
+
+import 'package:english_dictionary/models/word.dart';
+
+class HttpService {
+  static Future<Word> searchWordDefinition(String? word) async {
+    var url =
+        Uri.parse("https://api.dictionaryapi.dev/api/v2/entries/en/$word");
+    Response response = await get(url);
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      log(response.body);
+      return Word.fromJson(json);
+    } else {
+      throw (response);
+    }
+  }
+}
