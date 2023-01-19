@@ -1,7 +1,7 @@
 import 'package:english_dictionary/services/http_service.dart';
 import 'package:flutter/material.dart';
 
-import '../models/word.dart';
+import '../models/dictionary_model.dart';
 
 class DetailScreen extends StatefulWidget {
   String? entry;
@@ -12,7 +12,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  late Future<Word> word;
+  late FutureList<<DictionaryModel>> word;
 
   @override
   void initState() {
@@ -25,11 +25,11 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       body: FutureBuilder(
         future: word,
-        builder: (BuildContext context, AsyncSnapshot<Word> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<DictionaryModel>> snapshot) {
           if (snapshot.hasData) {
-            Word word = snapshot.data!;
+            List<Dictionary_Model> dictionary = snapshot.data!;
             return Center(
-              child: Text(word.word!),
+              child: Text(dictionary[0].word!),
             );
           }else{
             return Center(
