@@ -1,18 +1,23 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:http/http.dart'; 
-
-import 'package:english_dictionary/models/word.dart';
+import 'dart:io';
+import 'package:english_dictionary/models/dictionary_model.dart';
+import 'package:http/http.dart';
 
 class HttpService {
-  static Future<Word> searchWordDefinition(String? word) async {
+  static Future<List<DictionaryModel>> searchWordDefinition(
+      String? word) async {
     var url =
         Uri.parse("https://api.dictionaryapi.dev/api/v2/entries/en/$word");
     Response response = await get(url);
-    if (response.statusCode == 200) {
-      
-    } else {
-      throw (response);
-    }
+    try {
+      if (response.statusCode == 200) {
+        return dictionaryModelFromJson(response.body);
+      } else {
+        throw (response);
+      }
+    } on SocketException {
+      throw ("Unable to connecrt");
+    } 
   }
 }
