@@ -1,13 +1,13 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:english_dictionary/models/dictionary_model.dart';
-import 'package:english_dictionary/widgets/definitions.dart';
+import 'package:english_dictionary/widgets/meanings.dart';
 import 'package:english_dictionary/widgets/spacings.dart';
 import 'package:english_dictionary/widgets/textStyle.dart';
 import 'package:flutter/material.dart';
 
 class WordDetail extends StatefulWidget {
-  DictionaryModel? dictionary;
-  WordDetail({this.dictionary});
+  List<DictionaryModel?> dictionary;
+  WordDetail({required this.dictionary});
 
   @override
   State<WordDetail> createState() => _WordDetailState();
@@ -33,42 +33,58 @@ class _WordDetailState extends State<WordDetail> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          itemCount: widget.dictionary.length,
+          itemBuilder: (context, index) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.dictionary!.word!,
-                  style: kTextStyle(25),
+                index > 0
+                    ? const Divider(
+                        height: 0.2,
+                        color: Colors.black,
+                      )
+                    : const SizedBox(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.dictionary[index]!.word!,
+                      style: kTextStyle(30),
+                    ),
+                    index == 0
+                        ? IconButton(
+                            onPressed: () {
+                              playSound();
+                            },
+                            icon: Icon(play ? Icons.pause : Icons.play_arrow),
+                            iconSize: 30,
+                          )
+                        : const SizedBox(),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {
-                    playSound();
-                  },
-                  icon: Icon(play ? Icons.pause : Icons.play_arrow),
-                  iconSize: 30,
+                Text(
+                    "Pronunciation: ${widget.dictionary[index]!.phonetics![0].text}"),
+                const Padding(
+                  padding: EdgeInsets.only(top: 5, bottom: 5),
+                  child: Divider(
+                    height: 0.2,
+                    color: Colors.black,
+                  ),
+                ),
+                Text(
+                  widget.dictionary[index]!.meanings![0].partOfSpeech!,
+                  style: kTextStyle(20),
+                ),
+                addVerticalSpace(10),
+                Meanings(
+                  dictionary: widget.dictionary[index],
                 ),
               ],
-            ),
-            Text("Pronunciation: ${widget.dictionary!.phonetics![0].text}"),
-            const Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 5),
-              child: Divider(
-                height: 0.2,
-                color: Colors.black,
-              ),
-            ),
-            Text(
-              widget.dictionary!.meanings![0].partOfSpeech!,
-              style: kTextStyle(30),
-            ),
-            addVerticalSpace(10),
-            Meanings(
-              dictionary: widget.dictionary,
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
@@ -96,7 +112,8 @@ const car = [
             "https://api.dictionaryapi.dev/media/pronunciations/en/car-us.mp3",
         "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=424729",
         "license": {
-          "name": "BY-SA 3.0",
+          "n                                                                                                                                                                                                                                                                                                                                                            ame":
+              "BY-SA 3.0",
           "url": "https://creativecommons.org/licenses/by-sa/3.0"
         }
       }
