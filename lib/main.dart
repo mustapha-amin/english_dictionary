@@ -5,6 +5,9 @@ void main() {
   runApp(
     MaterialApp(
       home: const HomePage(),
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
       debugShowCheckedModeBanner: false,
     ),
   );

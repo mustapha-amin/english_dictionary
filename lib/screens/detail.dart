@@ -1,7 +1,7 @@
+import 'package:english_dictionary/models/dictionary_model.dart';
 import 'package:english_dictionary/services/http_service.dart';
+import 'package:english_dictionary/widgets/word_detail.dart';
 import 'package:flutter/material.dart';
-
-import '../models/dictionary_model.dart';
 
 class DetailScreen extends StatefulWidget {
   String? entry;
@@ -12,11 +12,11 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  late FutureList<<DictionaryModel>> word;
+  late Future<List<DictionaryModel>> dictionary;
 
   @override
   void initState() {
-    word = HttpService.searchWordDefinition(widget.entry);
+    dictionary = HttpService.searchWordDefinition(widget.entry);
     super.initState();
   }
 
@@ -24,15 +24,36 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: word,
-        builder: (BuildContext context, AsyncSnapshot<List<DictionaryModel>> snapshot) {
+        future: dictionary,
+        builder: (BuildContext context,
+            AsyncSnapshot<List<DictionaryModel?>> snapshot) {
           if (snapshot.hasData) {
-            List<Dictionary_Model> dictionary = snapshot.data!;
-            return Center(
-              child: Text(dictionary[0].word!),
+            List<DictionaryModel?> dictionary = snapshot.data!;
+            return WordDetail(
+              dictionary: dictionary,
             );
-          }else{
-            return Center(
+          } else if (snapshot.hasError) {
+            return Scaffold(
+              appBar: AppBar(
+                elevation: 0,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                foregroundColor: Colors.black,
+              ),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.error_outline,
+                      size: 50,
+                    ),
+                    Text("An error occured"),
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }

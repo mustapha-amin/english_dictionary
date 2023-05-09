@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:english_dictionary/services/http_service.dart';
 import 'package:english_dictionary/widgets/searchbar.dart';
 import 'package:english_dictionary/widgets/spacings.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +14,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _searchbarController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(

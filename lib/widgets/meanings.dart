@@ -4,69 +4,41 @@ import 'package:english_dictionary/widgets/textStyle.dart';
 import 'package:flutter/material.dart';
 
 class Meanings extends StatelessWidget {
-  DictionaryModel? dictionary;
-  Meanings({this.dictionary});
+  List<Meaning>? meanings;
+  Meanings({this.meanings});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
-      itemCount: dictionary!.meanings![0].definitions!.length,
+      physics: const ClampingScrollPhysics(),
+      itemCount: meanings!.length,
       itemBuilder: (context, index) {
-        Meaning meanings = dictionary!.meanings![0];
-        List<Definition>? definitions = meanings.definitions;
-        Definition? definition = definitions![index];
-        String? example = definition.example;
-        List? synonyms = definition.synonyms;
-        List? antonyms = definition.antonyms;
+        List<Definition>? definitions = meanings![index].definitions;
+        String? partOfSpeech = meanings![index].partOfSpeech;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            synonyms!.isNotEmpty
-                ? Wrap(
-                    direction: Axis.horizontal,
-                    children: [
-                      Text("Synonyms: "),
-                      ...synonyms.map(
-                        (e) => Text(e + " "),
-                      )
-                    ],
-                  )
-                : const SizedBox(),
-            antonyms!.isNotEmpty
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Text("Antonyms: "),
-                      Wrap(
-                        clipBehavior: Clip.hardEdge,
-                        direction: Axis.horizontal,
-                        children: [
-                          ...antonyms.map(
-                            (e) => Text(e + " "),
-                          )
-                        ],
-                      ),
-                    ],
-                  )
-                : const SizedBox(),
-            Wrap(
-              children: [
-                Text("${index + 1}. ${definition.definition!}"),
-              ],
+            Text(
+              partOfSpeech!,
+              style: kTextStyle(20, true),
             ),
-            example != null
-                ? Text(
-                    example,
-                    style: kTextStyle(
-                      12,
-                      true,
-                      FontStyle.italic,
-                    ),
-                  )
-                : SizedBox(),
+            addVerticalSpace(10),
+            ...definitions!.map((e) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("${definitions.indexOf(e) + 1} ${e.definition!}"),
+                    addVerticalSpace(5),
+                    e.example != null
+                        ? Text(
+                            e.example!,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        : addVerticalSpace(0),
+                    addVerticalSpace(7),
+                  ],
+                )),
             addVerticalSpace(10),
           ],
         );
@@ -74,3 +46,4 @@ class Meanings extends StatelessWidget {
     );
   }
 }
+
