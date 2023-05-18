@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:english_dictionary/models/dictionary_model.dart';
 import 'package:english_dictionary/widgets/meanings.dart';
 import 'package:english_dictionary/widgets/textStyle.dart';

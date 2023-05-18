@@ -1,4 +1,4 @@
-import 'package:english_dictionary/widgets/searchbar.dart';
+//import 'package:english_dictionary/widgets/searchbar.dart';
 import 'package:english_dictionary/widgets/spacings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,8 +38,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 addVerticalSpace(20),
                 SearchBar(
-                  searchbarController: _searchbarController,
-                ),
+                  controller: _searchbarController,
+                )
               ],
             ),
           ),
