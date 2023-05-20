@@ -1,7 +1,8 @@
 //import 'package:english_dictionary/widgets/searchbar.dart';
 import 'package:english_dictionary/widgets/spacings.dart';
+import 'package:english_dictionary/widgets/textStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../widgets/searchbar.dart' as custom;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,7 +15,6 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _searchbarController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -27,18 +27,15 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Image.asset(
                   'lib/assets/images/dictionary.jpg',
-                  height: size.height / 4,
+                  height: size.height / 4.3,
                 ),
                 Text(
                   "Dictionary",
-                  style: GoogleFonts.raleway(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: kTextStyle(30, true),
                 ),
                 addVerticalSpace(20),
-                SearchBar(
-                  controller: _searchbarController,
+                custom.SearchBar(
+                  searchbarController: _searchbarController,
                 )
               ],
             ),

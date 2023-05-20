@@ -39,10 +39,10 @@ class _DetailScreenState extends State<DetailScreen> {
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 foregroundColor: Colors.black,
               ),
-              body: Center(
+              body: const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(
                       Icons.error_outline,
                       size: 50,

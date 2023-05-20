@@ -28,12 +28,15 @@ class Meanings extends StatelessWidget {
             ...definitions!.map((e) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${definitions.indexOf(e) + 1} ${e.definition!}"),
+                    Text(
+                      "${definitions.indexOf(e) + 1} ${e.definition!}",
+                      style: kTextStyle(13),
+                    ),
                     addVerticalSpace(5),
                     e.example != null
                         ? Text(
                             e.example!,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: kTextStyle(13),
                           )
                         : addVerticalSpace(0),
                     addVerticalSpace(7),
@@ -46,4 +49,3 @@ class Meanings extends StatelessWidget {
     );
   }
 }
-
