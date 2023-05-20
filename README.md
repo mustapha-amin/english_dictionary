@@ -2,12 +2,10 @@
 
 A new Flutter project.
 
-## Getting Started!
+## Getting S![Screenshot_20230520-074147](https://github.com/mustapha-amin/english_dictionary/assets/70119794/212a5f90-74be-4608-a0c7-451d857af2be)
+tarted!![Screenshot_20230520-074155](https://github.com/mustapha-amin/english_dictionary/assets/70119794/d07b16e0-9b75-4d06-8b59-d54076d7324e)
 
-![Screenshot_20230510-153904](https://github.com/mustapha-amin/english_dictionary/assets/70119794/e979ffd6-d0ba-4614-9673-b149b228318f)
-![Screenshot_20230510-153918](https://github.com/mustapha-amin/english_dictionary/assets/70119794/5d21afc9-1c82-4a3f-bf3b-ac8b902caeab)
-![Screenshot_20230510-155532](https://github.com/mustapha-amin/english_dictionary/assets/70119794/57045da8-847e-4db0-adfc-d2e90e8d44f7)
-
+![Screenshot_20230520-074206](https://github.com/mustapha-amin/english_dictionary/assets/70119794/835fe05e-9fc3-4c7a-aa3a-5fbdea563129)
 
 This project is a starting point for a Flutter application.
 
