@@ -4,13 +4,6 @@ A new Flutter project.
 
 ## Getting Started!
 
-
-
-Uploading LDPlayer 2023-05-19 23-30-19.mp4…
-
-
-
-
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
