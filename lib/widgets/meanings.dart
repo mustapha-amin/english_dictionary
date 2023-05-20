@@ -34,10 +34,14 @@ class Meanings extends StatelessWidget {
                     ),
                     addVerticalSpace(5),
                     e.example != null
-                        ? Text(
-                            e.example!,
-                            style: kTextStyle(13),
-                          )
+                        ? Row(
+                          children: [
+                            Text(
+                                e.example!,
+                                style: kTextStyle(13, true),
+                              ),
+                          ],
+                        )
                         : addVerticalSpace(0),
                     addVerticalSpace(7),
                   ],
